@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Plan tasks, set priorities, and track your progress.">
+  <title>Task Management Planner</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="TaskFlow home"><span class="brand-mark">✓</span><span>TaskFlow<span class="brand-dot">.</span></span></a>
+      <p class="nav-label">WORKSPACE</p>
+      <nav aria-label="Main navigation">
+        <button class="nav-item active" data-filter="all"><span>▦</span> All tasks <span class="nav-count" id="allCount">0</span></button>
+        <button class="nav-item" data-filter="today"><span>◷</span> Due today</button>
+        <button class="nav-item" data-filter="upcoming"><span>▤</span> Upcoming</button>
+        <button class="nav-item" data-filter="completed"><span>✓</span> Completed</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="mini-card"><span class="mini-icon">✦</span><strong>Small steps add up.</strong><p>Keep going — every task completed is progress.</p></div>
+        <p class="sidebar-foot">TaskFlow Planner · Student project</p>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div><p class="eyebrow" id="dateLabel">YOUR WORKSPACE</p><h1>Good things start with a plan<span>.</span></h1><p class="subtitle">Organize your day, one task at a time.</p></div>
+        <div class="top-actions"><span class="status-pill"><span class="status-dot"></span> Planner ready</span><button class="primary-btn" id="addTaskTop">＋ Add task</button></div>
+      </header>
+
+      <section class="stats-grid" aria-label="Task summary">
+        <article class="stat-card"><div class="stat-top"><span>Total tasks</span><span class="stat-icon purple">▦</span></div><strong id="totalStat">0</strong><p>Tasks in your workspace</p></article>
+        <article class="stat-card"><div class="stat-top"><span>In progress</span><span class="stat-icon blue">◷</span></div><strong id="progressStat">0</strong><p>Still to be completed</p></article>
+        <article class="stat-card"><div class="stat-top"><span>Completed</span><span class="stat-icon green">✓</span></div><strong id="completedStat">0</strong><p>Look how far you've come</p></article>
+        <article class="stat-card"><div class="stat-top"><span>Overdue</span><span class="stat-icon orange">!</span></div><strong id="overdueStat">0</strong><p>Tasks past their due date</p></article>
+      </section>
+
+      <section class="planner-panel">
+        <div class="section-heading"><div><p class="eyebrow">YOUR TASK LIST</p><h2>My tasks</h2></div><div class="list-tools"><label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search tasks..." aria-label="Search tasks"></label><select id="priorityFilter" aria-label="Filter by priority"><option value="all">All priorities</option><option value="High">High priority</option><option value="Medium">Medium priority</option><option value="Low">Low priority</option></select></div></div>
+        <div class="progress-wrap"><div class="progress-caption"><span>Overall progress</span><strong id="progressLabel">0%</strong></div><div class="progress-track"><div class="progress-bar" id="progressBar"></div></div></div>
+        <div class="task-list" id="taskList"><div class="empty-state"><div class="empty-art">✓</div><h3>Your next achievement starts here</h3><p>Add a task to begin planning your day.</p><button class="primary-btn" id="emptyAddBtn">＋ Create your first task</button></div></div>
+      </section>
+      <footer>Made for focused days <span>✦</span> Task Management Planner</footer>
+    </main>
+  </div>
+
+  <dialog id="taskDialog" class="task-dialog">
+    <form id="taskForm">
+      <div class="dialog-head"><div><p class="eyebrow">TASK DETAILS</p><h2 id="dialogTitle">Create a task</h2></div><button type="button" class="icon-btn" id="closeDialog" aria-label="Close dialog">×</button></div>
+      <label for="taskTitle">Task title <span>*</span></label><input id="taskTitle" name="title" maxlength="120" required placeholder="e.g. Prepare for electronics exam">
+      <label for="taskDescription">Description</label><textarea id="taskDescription" name="description" rows="3" maxlength="1000" placeholder="Add a few details (optional)"></textarea>
+      <div class="form-row"><div><label for="taskDueDate">Due date <span>*</span></label><input id="taskDueDate" name="dueDate" type="date" required></div><div><label for="taskPriority">Priority</label><select id="taskPriority" name="priority"><option>Medium</option><option>High</option><option>Low</option></select></div></div>
+      <div class="dialog-error" id="formError" role="alert"></div>
+      <div class="dialog-actions"><button type="button" class="secondary-btn" id="cancelDialog">Cancel</button><button class="primary-btn" type="submit" id="saveTaskBtn">Save task</button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
